@@ -1,324 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GH0FSGVRG7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GH0FSGVRG7');
-</script>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PQN38WQQ');</script>
-<!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Play & Earn ₹5</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building the Game</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #e0f7fa;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #a0e7e5, #0077b6);
+      color: white;
       text-align: center;
     }
-    header {
-      background: #006064;
-      color: white;
-      padding: 20px;
+
+    .banner {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      max-width: 90%;
     }
-    #disclaimer {
-      background: #ffc107;
-      padding: 10px;
-      font-size: 16px;
-      font-weight: bold;
+
+    .banner h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
     }
-    #banner {
-      background: url('https://via.placeholder.com/400x200?text=Play+Color+Game+%26+Earn+%E2%82%B95');
-      background-size: cover;
-      height: 200px;
-      position: relative;
+
+    .banner p {
+      font-size: 1.2rem;
     }
-    #start-button {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #00796b;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 18px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .color-btn {
-      padding: 40px;
-      margin: 10px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      color: white;
-      font-weight: bold;
-      transition: transform 0.2s;
-    }
-    .color-btn:active {
-      transform: scale(0.95);
-    }
-    #status, #timer, #target, #banned, #word-test, #finish {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-    #next-btn, #redeem-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #00695c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 18px;
-    }
-    #game-container {
-      display: none;
-    }
-    #form-section {
-      display: none;
-      padding: 20px;
-    }
-    input {
-      padding: 10px;
-      width: 80%;
-      margin: 10px auto;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+
+    @media (max-width: 600px) {
+      .banner h1 {
+        font-size: 1.8rem;
+      }
+      .banner p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>🎮 Play This Game & Earn ₹5</h1>
-</header>
-<div id="disclaimer">⚠️ Disclaimer: This game is for users 18+ and played at your own risk.</div>
-<div id="banner">
-  <button id="start-button" onclick="startGame()">Start Game</button>
-</div>
-
-<div id="game-container">
-  <h2 id="stage-title">Color Tap Challenge</h2>
-  <div id="game-area"></div>
-  <div id="target"></div>
-  <div id="timer"></div>
-  <div id="banned"></div>
-  <div id="word-test"></div>
-  <div id="status"></div>
-  <div id="finish" style="display:none; font-size:22px; color:green;">🎉 You completed all 5 stages and earned ₹5!<br/>Send your Name and UPI ID to <b>shanivara0@gmail.com</b> to claim your reward.</div>
-  <button id="next-btn" onclick="nextStage()">Next Stage</button>
-  <button id="redeem-btn" onclick="showRedeemForm()">🎁 Redeem ₹5</button>
-</div>
-
-<div id="form-section">
-  <h2>🎁 Enter Details to Redeem</h2>
-  <input type="text" id="name" placeholder="Your Name" />
-  <input type="text" id="number" placeholder="Phone or UPI ID" />
-  <button onclick="sendToEmail()">Send</button>
-</div>
-
-<script>
-const colors = ['RED', 'GREEN', 'BLUE', 'YELLOW'];
-const colorHex = {
-  RED: '#f44336',
-  GREEN: '#4caf50',
-  BLUE: '#2196f3',
-  YELLOW: '#ffeb3b'
-};
-
-let stage = 1;
-let score = 0;
-let timer, correctColor, bannedColor, correctAnswer;
-let currentRound = 0;
-
-function startGame() {
-  document.getElementById('banner').style.display = 'none';
-  document.getElementById('disclaimer').style.display = 'none';
-  document.getElementById('game-container').style.display = 'block';
-  startStage();
-}
-
-function resetGame(msg) {
-  alert(msg);
-  stage = 1;
-  score = 0;
-  startStage();
-}
-
-function nextStage() {
-  stage++;
-  score = 0;
-  startStage();
-}
-
-function startStage() {
-  document.getElementById('status').textContent = '';
-  document.getElementById('timer').textContent = '';
-  document.getElementById('banned').textContent = '';
-  document.getElementById('word-test').textContent = '';
-  document.getElementById('target').textContent = '';
-  document.getElementById('game-area').innerHTML = '';
-  document.getElementById('next-btn').style.display = 'none';
-  document.getElementById('redeem-btn').style.display = 'none';
-
-  switch(stage) {
-    case 1: document.getElementById('stage-title').textContent = 'Stage 1: Tap the Correct Color'; loadColorTap(); break;
-    case 2: document.getElementById('stage-title').textContent = 'Stage 2: Tap Fast!'; loadTimedTap(); break;
-    case 3: document.getElementById('stage-title').textContent = 'Stage 3: Avoid Banned Color'; loadAvoidTap(); break;
-    case 4: document.getElementById('stage-title').textContent = 'Stage 4: Tap the TEXT COLOR'; loadStroopTest(); break;
-    case 5: document.getElementById('stage-title').textContent = 'Stage 5: Tap 50 Colors in 2s'; currentRound = 0; loadFinalStage(); break;
-    default:
-      document.getElementById('finish').style.display = 'block';
-      document.getElementById('redeem-btn').style.display = 'inline-block';
-  }
-}
-
-function loadColorTap() {
-  correctColor = colors[Math.floor(Math.random() * colors.length)];
-  document.getElementById('target').textContent = `Tap: ${correctColor}`;
-  loadButtons(color => checkColorTap(color, correctColor, 5));
-}
-
-function loadTimedTap() {
-  correctColor = colors[Math.floor(Math.random() * colors.length)];
-  document.getElementById('target').textContent = `Tap: ${correctColor}`;
-  let timeLeft = 5;
-  document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
-  timer = setInterval(() => {
-    timeLeft--;
-    document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
-    if (timeLeft <= 15) {
-      clearInterval(timer);
-      resetGame('⏰ Too Slow! Back to Stage 1');
-    }
-  }, 1000);
-
-  loadButtons(color => {
-    clearInterval(timer);
-    checkColorTap(color, correctColor, 5);
-  });
-}
-
-function loadAvoidTap() {
-  bannedColor = colors[Math.floor(Math.random() * colors.length)];
-  document.getElementById('banned').textContent = `❌ Don’t tap: ${bannedColor}`;
-  loadButtons(color => {
-    if (color === bannedColor) resetGame('You tapped the banned color!');
-    else checkColorTap(color, 'safe', 5);
-  });
-}
-
-function loadStroopTest() {
-  const word = colors[Math.floor(Math.random() * colors.length)];
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  correctAnswer = color;
-  const wordTest = document.getElementById('word-test');
-  wordTest.textContent = word;
-  wordTest.style.color = colorHex[color];
-  loadButtons(color => {
-    if (color === correctAnswer) checkColorTap(color, correctAnswer, 5);
-    else resetGame('❌ Wrong color! Back to Stage 1');
-  });
-}
-
-function loadFinalStage() {
-  document.getElementById('status').textContent = `Progress: 0 / 50`;
-  function runRound() {
-    if (currentRound >= 50) {
-      stage++;
-      startStage();
-      return;
-    }
-    document.getElementById('timer').textContent = `⏱ Round ${currentRound + 1} of 50`;
-    const correct = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById('target').textContent = `Tap: ${correct}`;
-    const area = document.getElementById('game-area');
-    area.innerHTML = '';
-    const shuffled = [...colors].sort(() => 0.5 - Math.random());
-    shuffled.forEach(c => {
-      const btn = document.createElement('button');
-      btn.className = 'color-btn';
-      btn.style.backgroundColor = colorHex[c];
-      btn.textContent = c;
-      btn.onclick = () => {
-        if (c === correct) {
-          currentRound++;
-          document.getElementById('status').textContent = `Progress: ${currentRound} / 50`;
-          setTimeout(runRound, 300);
-        } else {
-          resetGame('❌ Wrong tap! Back to Stage 1');
-        }
-      };
-      area.appendChild(btn);
-    });
-    setTimeout(() => {
-      if (currentRound < 50) resetGame('⏰ Too Slow! Back to Stage 1');
-    }, 2000);
-  }
-  runRound();
-}
-
-function checkColorTap(tapped, expected, required) {
-  if (expected === 'safe' || tapped === expected) {
-    score++;
-    document.getElementById('status').textContent = `✅ (${score}/${required})`;
-    if (score >= required) {
-      document.getElementById('next-btn').style.display = 'inline-block';
-    } else {
-      setTimeout(startStage, 800);
-    }
-  } else {
-    resetGame('❌ Wrong tap! Back to Stage 1');
-  }
-}
-
-function loadButtons(callback) {
-  const area = document.getElementById('game-area');
-  area.innerHTML = '';
-  const shuffled = [...colors].sort(() => 0.5 - Math.random());
-  shuffled.forEach(c => {
-    const btn = document.createElement('button');
-    btn.className = 'color-btn';
-    btn.style.backgroundColor = colorHex[c];
-    btn.textContent = c;
-    btn.onclick = () => callback(c);
-    area.appendChild(btn);
-  });
-}
-
-function showRedeemForm() {
-  document.getElementById('form-section').style.display = 'block';
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-}
-
-function sendToEmail() {
-  const name = document.getElementById('name').value.trim();
-  const number = document.getElementById('number').value.trim();
-  if (!name || !number) return alert('Please enter your name and UPI or phone number.');
-  const mailto = `mailto:shanivara0@gmail.com?subject=Game%20Redeem%20Request&body=Name:%20${encodeURIComponent(name)}%0AUPI/Phone:%20${encodeURIComponent(number)}`;
-  window.location.href = mailto;
-}
-</script>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQN38WQQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
+  <div class="banner">
+    <h1>🚧 Building the Game 🚧</h1>
+    <p>We're working hard to bring you an amazing experience. Please check back soon!</p>
+  </div>
 </body>
 </html>
+
 
 
 
