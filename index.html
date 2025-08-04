@@ -119,7 +119,8 @@ const colorHex = {
 
 let stage = 1;
 let score = 0;
-let timer, timeoutID, correctColor, bannedColor, correctAnswer;
+let timer, correctColor, bannedColor, correctAnswer;
+let currentRound = 0;
 
 function startGame() {
   document.getElementById('banner').style.display = 'none';
@@ -131,6 +132,7 @@ function resetGame(msg) {
   alert(msg);
   stage = 1;
   score = 0;
+  currentRound = 0;
   startStage();
 }
 
@@ -164,9 +166,9 @@ function startStage() {
       document.getElementById('stage-title').textContent = 'Stage 4: Tap the TEXT COLOR';
       loadStroopTest(); break;
     case 5:
-      document.getElementById('stage-title').textContent = 'Stage 5: Speed Tap Madness';
+      document.getElementById('stage-title').textContent = 'Stage 5: Tap 50 Times to Win';
       currentRound = 0;
-      loadSpeedTap(); break;
+      loadFinalChallenge(); break;
     default:
       document.getElementById('finish').style.display = 'block';
       document.getElementById('redeem-btn').style.display = 'inline-block';
@@ -192,7 +194,6 @@ function loadTimedTap() {
       resetGame('⏰ Too Slow! Back to Stage 1');
     }
   }, 1000);
-
   loadButtons(color => {
     clearInterval(timer);
     checkColorTap(color, correctColor, 5);
@@ -221,34 +222,24 @@ function loadStroopTest() {
   });
 }
 
-let currentRound = 0;
-function loadSpeedTap() {
-  if (currentRound >= 10) {
-    startStage();
-    return;
-  }
-  correctColor = colors[Math.floor(Math.random() * colors.length)];
-  document.getElementById('target').textContent = `Tap Fast: ${correctColor}`;
-  let timeLeft = 2;
-  document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
-  timer = setInterval(() => {
-    timeLeft--;
-    document.getElementById('timer').textContent = `⏱ ${timeLeft}s`;
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      resetGame('Too Slow! Back to Stage 1');
+function loadFinalChallenge() {
+  document.getElementById('target').textContent = `Tap RED button 50 times to earn ₹5!`;
+  let tapCount = 0;
+  const area = document.getElementById('game-area');
+  area.innerHTML = '';
+  const redBtn = document.createElement('button');
+  redBtn.className = 'color-btn';
+  redBtn.style.backgroundColor = colorHex.RED;
+  redBtn.textContent = 'RED';
+  redBtn.onclick = () => {
+    tapCount++;
+    document.getElementById('status').textContent = `✅ (${tapCount}/50)`;
+    if (tapCount >= 50) {
+      document.getElementById('finish').style.display = 'block';
+      document.getElementById('redeem-btn').style.display = 'inline-block';
     }
-  }, 1000);
-
-  loadButtons(color => {
-    clearInterval(timer);
-    if (color === correctColor) {
-      currentRound++;
-      setTimeout(loadSpeedTap, 500);
-    } else {
-      resetGame('Wrong Tap! Back to Stage 1');
-    }
-  });
+  };
+  area.appendChild(redBtn);
 }
 
 function checkColorTap(tapped, expected, required) {
@@ -288,11 +279,9 @@ function sendToTelegram() {
   const name = document.getElementById('name').value.trim();
   const number = document.getElementById('number').value.trim();
   if (!name || !number) return alert('Please enter your name and number.');
-
   const message = `New Game Redeem:\nName: ${name}\nContact: ${number}`;
   const botToken = 'YOUR_BOT_TOKEN';
   const chatId = 'YOUR_CHAT_ID';
-
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -304,4 +293,6 @@ function sendToTelegram() {
 
 </body>
 </html>
+
+
 
