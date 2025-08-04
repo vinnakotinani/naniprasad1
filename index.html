@@ -16,6 +16,12 @@
       color: white;
       padding: 20px;
     }
+    #disclaimer {
+      background: #ffc107;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
     #banner {
       background: url('https://via.placeholder.com/400x200?text=Play+Color+Game+%26+Earn+%E2%82%B95');
       background-size: cover;
@@ -83,7 +89,7 @@
 <header>
   <h1>🎮 Play This Game & Earn ₹5</h1>
 </header>
-
+<div id="disclaimer">⚠️ Disclaimer: This game is for users 18+ and played at your own risk.</div>
 <div id="banner">
   <button id="start-button" onclick="startGame()">Start Game</button>
 </div>
@@ -96,7 +102,7 @@
   <div id="banned"></div>
   <div id="word-test"></div>
   <div id="status"></div>
-  <div id="finish" style="display:none; font-size:22px; color:green;">🎉 You completed all 5 stages and earned ₹5!</div>
+  <div id="finish" style="display:none; font-size:22px; color:green;">🎉 You completed all 5 stages and earned ₹5!<br/>Send your Name and UPI ID to <b>shanivara0@gmail.com</b> to claim your reward.</div>
   <button id="next-btn" onclick="nextStage()">Next Stage</button>
   <button id="redeem-btn" onclick="showRedeemForm()">🎁 Redeem ₹5</button>
 </div>
@@ -105,7 +111,7 @@
   <h2>🎁 Enter Details to Redeem</h2>
   <input type="text" id="name" placeholder="Your Name" />
   <input type="text" id="number" placeholder="Phone or UPI ID" />
-  <button onclick="sendToTelegram()">Send</button>
+  <button onclick="sendToEmail()">Send</button>
 </div>
 
 <script>
@@ -124,6 +130,7 @@ let currentRound = 0;
 
 function startGame() {
   document.getElementById('banner').style.display = 'none';
+  document.getElementById('disclaimer').style.display = 'none';
   document.getElementById('game-container').style.display = 'block';
   startStage();
 }
@@ -132,7 +139,6 @@ function resetGame(msg) {
   alert(msg);
   stage = 1;
   score = 0;
-  currentRound = 0;
   startStage();
 }
 
@@ -153,22 +159,11 @@ function startStage() {
   document.getElementById('redeem-btn').style.display = 'none';
 
   switch(stage) {
-    case 1:
-      document.getElementById('stage-title').textContent = 'Stage 1: Tap the Correct Color';
-      loadColorTap(); break;
-    case 2:
-      document.getElementById('stage-title').textContent = 'Stage 2: Tap Fast!';
-      loadTimedTap(); break;
-    case 3:
-      document.getElementById('stage-title').textContent = 'Stage 3: Avoid Banned Color';
-      loadAvoidTap(); break;
-    case 4:
-      document.getElementById('stage-title').textContent = 'Stage 4: Tap the TEXT COLOR';
-      loadStroopTest(); break;
-    case 5:
-      document.getElementById('stage-title').textContent = 'Stage 5: Tap 50 Times to Win';
-      currentRound = 0;
-      loadFinalChallenge(); break;
+    case 1: document.getElementById('stage-title').textContent = 'Stage 1: Tap the Correct Color'; loadColorTap(); break;
+    case 2: document.getElementById('stage-title').textContent = 'Stage 2: Tap Fast!'; loadTimedTap(); break;
+    case 3: document.getElementById('stage-title').textContent = 'Stage 3: Avoid Banned Color'; loadAvoidTap(); break;
+    case 4: document.getElementById('stage-title').textContent = 'Stage 4: Tap the TEXT COLOR'; loadStroopTest(); break;
+    case 5: document.getElementById('stage-title').textContent = 'Stage 5: Tap 50 Colors in 2s'; currentRound = 0; loadFinalStage(); break;
     default:
       document.getElementById('finish').style.display = 'block';
       document.getElementById('redeem-btn').style.display = 'inline-block';
@@ -194,6 +189,7 @@ function loadTimedTap() {
       resetGame('⏰ Too Slow! Back to Stage 1');
     }
   }, 1000);
+
   loadButtons(color => {
     clearInterval(timer);
     checkColorTap(color, correctColor, 5);
@@ -222,24 +218,41 @@ function loadStroopTest() {
   });
 }
 
-function loadFinalChallenge() {
-  document.getElementById('target').textContent = `Tap RED button 50 times to earn ₹5!`;
-  let tapCount = 0;
-  const area = document.getElementById('game-area');
-  area.innerHTML = '';
-  const redBtn = document.createElement('button');
-  redBtn.className = 'color-btn';
-  redBtn.style.backgroundColor = colorHex.RED;
-  redBtn.textContent = 'RED';
-  redBtn.onclick = () => {
-    tapCount++;
-    document.getElementById('status').textContent = `✅ (${tapCount}/50)`;
-    if (tapCount >= 50) {
-      document.getElementById('finish').style.display = 'block';
-      document.getElementById('redeem-btn').style.display = 'inline-block';
+function loadFinalStage() {
+  document.getElementById('status').textContent = `Progress: 0 / 50`;
+  function runRound() {
+    if (currentRound >= 50) {
+      stage++;
+      startStage();
+      return;
     }
-  };
-  area.appendChild(redBtn);
+    document.getElementById('timer').textContent = `⏱ Round ${currentRound + 1} of 50`;
+    const correct = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById('target').textContent = `Tap: ${correct}`;
+    const area = document.getElementById('game-area');
+    area.innerHTML = '';
+    const shuffled = [...colors].sort(() => 0.5 - Math.random());
+    shuffled.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'color-btn';
+      btn.style.backgroundColor = colorHex[c];
+      btn.textContent = c;
+      btn.onclick = () => {
+        if (c === correct) {
+          currentRound++;
+          document.getElementById('status').textContent = `Progress: ${currentRound} / 50`;
+          setTimeout(runRound, 300);
+        } else {
+          resetGame('❌ Wrong tap! Back to Stage 1');
+        }
+      };
+      area.appendChild(btn);
+    });
+    setTimeout(() => {
+      if (currentRound < 50) resetGame('⏰ Too Slow! Back to Stage 1');
+    }, 2000);
+  }
+  runRound();
 }
 
 function checkColorTap(tapped, expected, required) {
@@ -275,24 +288,14 @@ function showRedeemForm() {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-function sendToTelegram() {
+function sendToEmail() {
   const name = document.getElementById('name').value.trim();
   const number = document.getElementById('number').value.trim();
-  if (!name || !number) return alert('Please enter your name and number.');
-  const message = `New Game Redeem:\nName: ${name}\nContact: ${number}`;
-  const botToken = 'YOUR_BOT_TOKEN';
-  const chatId = 'YOUR_CHAT_ID';
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text: message })
-  })
-    .then(res => res.ok ? alert('✅ Sent to Telegram!') : alert('❌ Failed to send'));
+  if (!name || !number) return alert('Please enter your name and UPI or phone number.');
+  const mailto = `mailto:shanivara0@gmail.com?subject=Game%20Redeem%20Request&body=Name:%20${encodeURIComponent(name)}%0AUPI/Phone:%20${encodeURIComponent(number)}`;
+  window.location.href = mailto;
 }
 </script>
 
 </body>
 </html>
-
-
-
